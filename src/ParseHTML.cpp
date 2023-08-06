@@ -22,6 +22,13 @@
 #include "Politician.hpp"
 #include "House_of_Representatives.hpp"
 
+enum OPTIONS {
+    CONGRESSPERSON_INFO,
+    PARTY_BREAKDOWN,
+    NUM_MEMS_JOIN_AFTER_YEAR,
+    QUIT
+};
+
 struct MemoryStruct {
     char * memory;
     size_t memorySize;
@@ -372,14 +379,15 @@ int main() {
         std::string key;
         
         std::cout << "Enter one the following:\n"
-                  << "\t1: Name of a Congressperson to get their information\n"
-                  << "\t2: Party Breakdown\n"
-                  << "\t3: Quit the program.\n";
+                  << "\t0: Name of a Congressperson to get their information\n"
+                  << "\t1: Party Breakdown\n"
+                  << "\t2: Get number of members who joined on or after a year\n"
+                  << "\t3: Quit the program\n";
         std::getline(std::cin, key);
         
         int option = std::atoi(key.c_str());
         switch(option) {
-            case 1:
+            case CONGRESSPERSON_INFO:
             {
                 std::string name;
                 std::cout << "Enter the name of the Congressperson:\n";
@@ -394,10 +402,18 @@ int main() {
 
                 break;
             }
-            case 2:
+            case PARTY_BREAKDOWN:
                 US_HouseOfRepresentatives->getPartyBreakdown();
                 break;
-            case 3:
+            case NUM_MEMS_JOIN_AFTER_YEAR:
+            {
+                std::string yearStr;
+                std::cout << "Enter the year:\n";
+                std::getline(std::cin, yearStr);
+                US_HouseOfRepresentatives->getMembersAfterYear(std::atoi(yearStr.c_str()));
+                break;
+            }
+            case QUIT:
                 std::cout << "Ending the program!\n";
                 exit(EXIT_SUCCESS);
         }

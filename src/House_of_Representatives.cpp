@@ -74,6 +74,17 @@ void House_of_Representatives::getPartyBreakdown() const {
     std::cout << "Since the " << majorityPartyName << " Party has " << majorityPartyMembers << " it is the majority party.\n";
 }
 
+void House_of_Representatives::getMembersAfterYear(const int year) const {
+    int numMembers = 0;
+    for(const auto & representative : this->representativesMap) {
+        if(representative.second->getTermBegin() >= year) {
+            numMembers++;
+        }
+    }
+
+    std::cout << "The number of members which joined on or after " << year << " is " << numMembers << ".\n";
+}
+
 void House_of_Representatives::addMember(Politician * politician) {
     representativesMap[politician->getName()] = politician;
 }

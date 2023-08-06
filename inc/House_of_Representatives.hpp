@@ -23,6 +23,7 @@ class House_of_Representatives : public virtual House {
         Politician * getMember(std::string name);
 
         void getPartyBreakdown() const;
+        void getMembersAfterYear(const int year) const;
 
     private:
         int numberOfMembers;
